@@ -30,18 +30,22 @@ def show_menu():
 
 
 def main_loop():
-    while True:
-        option = show_menu()
-        if option != "5":
-            if option in ["1","2","3","4"]:
-                print(f"You have selected option {option}")
-            else:
-                print("Invalid option")
-        elif option == "5":
+    try:
+        while True:
+            option = show_menu()
+            if option != "5":
+                if option in ["1","2","3","4"]:
+                    print(f"You have selected option {option}")
+                else:
+                    print("Invalid option")
+            elif option == "5":
+                conn.close()
+                break
+    finally:
+        if conn:
             conn.close()
-            break
-            
-        print("")
+
+    print("")
 
 
 conn = mongo_connect(MONGO_URI)
